@@ -317,7 +317,7 @@ export function get_page_handler(
 					console.error(`Failed to serialize preloaded data to transmit to the client at the /${segments.join('/')} route: ${err.message}`);
 					console.warn('The client will re-render over the server-rendered page fresh instead of continuing where it left off. See https://sapper.svelte.dev/docs#Return_value for more information');
 				})).join(',')}]`,
-				session: session && try_serialize(session, err => {
+				session: session && !error && try_serialize(session, err => {
 					throw new Error(`Failed to serialize session data: ${err.message}`);
 				}),
 				error: error && serialize_error(props.error)
